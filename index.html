@@ -27,6 +27,7 @@ async function startListening(options, onResult) {
   recognizer = speechCommands.create('BROWSER_FFT', vocabulary);
   await recognizer.ensureModelLoaded();
   const words = recognizer.wordLabels();  
+  console.log(SpeechCommands.version)
   console.log(words)  
   recognizer.params().sampleRateHz = 48000
     
