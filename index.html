@@ -63,6 +63,10 @@ function onDetection(detectionResult) {
   console.log(detectionResult)
  // console.log(detectedWord)
   document.getElementById('myDiv01').innerHTML = detectedWord
+  if (detectedWord == 'Left'){ responsiveVoice.speak('Why do you want to go left?', 'US English Female', {pitch: 1, rate: 1, volume : 1}) }  
+  if (detectedWord == 'Right'){ responsiveVoice.speak('Going to the right', 'US English Female', {pitch: 1, rate: 1, volume : 1}) }    
+  if (detectedWord == 'Up'){ responsiveVoice.speak('Up, up and away', 'US English Female', {pitch: 1, rate: 1, volume : 1}) }   
+  if (detectedWord == 'Down'){ responsiveVoice.speak('Going down now', 'US English Female', {pitch: 1, rate: 1, volume : 1}) }    
 }
 
 function setupListeners() {
