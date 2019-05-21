@@ -19,6 +19,9 @@
 
 //import {plotSpectrogram} from './ui';
 
+
+let SpeechCommands = speech-commands
+
 /** Remove the children of a div that do not have the isFixed attribute. */
 //export function removeNonFixedChildrenFromWordDiv(wordDiv) {
 function removeNonFixedChildrenFromWordDiv(wordDiv) {
