@@ -28,6 +28,10 @@ async function startListening(options, onResult) {
   await recognizer.ensureModelLoaded();
   const words = recognizer.wordLabels();  
   console.log(speechCommands)
+    
+   speechCommands.clearExamples() 
+    
+    
   console.log(words)  
   recognizer.params().sampleRateHz = 48000
     
