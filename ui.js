@@ -15,9 +15,9 @@
  * =============================================================================
  */
 
-import * as SpeechCommands from '../src';
+//import * as SpeechCommands from '../src';
 
-import {BACKGROUND_NOISE_TAG, UNKNOWN_TAG} from '../src';
+//import {BACKGROUND_NOISE_TAG, UNKNOWN_TAG} from '../src';
 
 const statusDisplay = document.getElementById('status-display');
 const candidateWordsContainer = document.getElementById('candidate-words');
@@ -27,7 +27,8 @@ const candidateWordsContainer = document.getElementById('candidate-words');
  *
  * @param {string} message Message to be logged.
  */
-export function logToStatusDisplay(message) {
+//export function logToStatusDisplay(message) {
+function logToStatusDisplay(message) {
   const date = new Date();
   statusDisplay.value += `[${date.toISOString()}] ` + message + '\n';
   statusDisplay.scrollTop = statusDisplay.scrollHeight;
@@ -42,7 +43,8 @@ let candidateWordSpans;
  *
  * @param {*} words Candidate words.
  */
-export function populateCandidateWords(words) {
+//export function populateCandidateWords(words) {
+function populateCandidateWords(words) {
   candidateWordSpans = {};
   while (candidateWordsContainer.firstChild) {
     candidateWordsContainer.removeChild(candidateWordsContainer.firstChild);
@@ -60,10 +62,12 @@ export function populateCandidateWords(words) {
   }
 }
 
-export function showCandidateWords() {
+//export function showCandidateWords() {
+ function showCandidateWords() {
   candidateWordsContainer.classList.remove('candidate-words-hidden');
 }
 
+function hideCandidateWords() {
 export function hideCandidateWords() {
   candidateWordsContainer.classList.add('candidate-words-hidden');
 }
@@ -88,7 +92,8 @@ export function hideCandidateWords() {
  *
  *   <= fftSize.
  */
-export async function plotSpectrogram(
+//export async function plotSpectrogram(
+async function plotSpectrogram(
     canvas, frequencyData, fftSize, fftDisplaySize, config) {
   if (fftDisplaySize == null) {
     fftDisplaySize = fftSize;
@@ -180,7 +185,8 @@ export async function plotSpectrogram(
  *   indefinitely till the next highlighting.
  * @param {number} topK Top _ scores to render.
  */
-export function plotPredictions(
+//export function plotPredictions(
+function plotPredictions(
     canvas, candidateWords, probabilities, topK, timeToLiveMillis) {
   if (topK != null) {
     let wordsAndProbs = [];
