@@ -18,15 +18,15 @@
 
 /* globals speechCommands */
 let recognizer;
-let messageArea;
+//let messageArea;
 let recognizerOptions;    // needed this global
 
-const MESSAGES = {
-  'up': '👍',
-  'down': '🙃',
-  'left': '👈',
-  'right': '➡️',
-}
+//const MESSAGES = {
+// 'up': '👍',
+//  'down': '🙃',
+//  'left': '👈',
+//  'right': '➡️',
+//}
 
 async function startListening(options, onResult) {
   const {vocabulary, probabilityThreshold} = options;
@@ -62,15 +62,16 @@ async function stopListening() {
     recognizer.stopListening()
   //  document.getElementById('stop').disabled = true;
    // document.getElementById('start').disabled = false;
-    messageArea.class = '';
+   // messageArea.class = '';
   }
 }
 
 function onDetection(detectionResult) {
   console.log('ondetection', detectionResult);
   const { detectedWord } = detectionResult;
-  messageArea.innerHTML = MESSAGES[detectedWord];
-  messageArea.className = detectedWord;
+ // messageArea.innerHTML = MESSAGES[detectedWord];
+  //messageArea.className = detectedWord;
+    console.log(detectedWord)
 }
 
 function setupListeners() {
