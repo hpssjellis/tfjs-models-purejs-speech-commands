@@ -90,9 +90,11 @@ function setupListeners() {
  // messageArea = document.getElementById('last-detected');
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-  setupListeners();
-});
+//document.addEventListener("DOMContentLoaded", function() {
+ // 
+    
+    
+//});
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -105,12 +107,20 @@ document.addEventListener("DOMContentLoaded", function() {
 <h2 align=center>tensorflow-models/speech-commands easiest example </h2>
 I am able to understand four speech commands. Up, down, left and right.<br><br>
 <div id="myDiv01">...</div><br><br>
+
+
+
+<input type=button value=Pre-Load Model" onclick="{
+   setupListeners()
+}">
+    
+
 <input type=button value="Start" onclick="{
    startListening(recognizerOptions, onDetection);
 }">
         
 <input type=button value="Stop" onclick="{
-stopListening()
+   stopListening()
 
 }">  <br>      
         
