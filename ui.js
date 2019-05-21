@@ -20,7 +20,7 @@
 //import {BACKGROUND_NOISE_TAG, UNKNOWN_TAG} from '../src';
 
 
-let SpeechCommands = speech-commands
+//let SpeechCommands = speech-commands
 
 
 const statusDisplay = document.getElementById('status-display');
