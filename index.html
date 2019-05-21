@@ -19,25 +19,12 @@
 
 /* globals speechCommands */
 let recognizer;
-//let messageArea;
 let recognizerOptions;    // needed this global
 
-//const MESSAGES = {
-// 'up': '👍',
-//  'down': '🙃',
-//  'left': '👈',
-//  'right': '➡️',
-//}
-
 async function startListening(options, onResult) {
-  const {vocabulary, probabilityThreshold} = options;
-  
- // document.getElementById('start').disabled = true;
-  
-  
+  const {vocabulary, probabilityThreshold} = options;  
   recognizer = speechCommands.create('BROWSER_FFT', vocabulary);
   await recognizer.ensureModelLoaded();
-//  document.getElementById('container').classList.remove('before-load');
   const words = recognizer.wordLabels();  
   console.log(words)  
   recognizer.params().sampleRateHz = 48000
@@ -61,53 +48,32 @@ async function startListening(options, onResult) {
     }
   });
   
- // document.getElementById('stop').disabled = false;
 }
 
 async function stopListening() {
   if (recognizer!= null) {
     recognizer.stopListening()
-  //  document.getElementById('stop').disabled = true;
-   // document.getElementById('start').disabled = false;
-   // messageArea.class = '';
   }
 }
 
 function onDetection(detectionResult) {
   console.log('ondetection', detectionResult);
   const { detectedWord } = detectionResult;
- // messageArea.innerHTML = MESSAGES[detectedWord];
-  //messageArea.className = detectedWord;
-    console.log(detectionResult)
-    console.log(detectedWord)
-    document.getElementById('myDiv01').innerHTML = detectedWord
+  console.log(detectionResult)
+  console.log(detectedWord)
+  document.getElementById('myDiv01').innerHTML = detectedWord
 }
 
 function setupListeners() {
   //const recognizerOptions = {
   recognizerOptions = {
-  //  vocabulary: 'directional4w',  // only up down left right
-    vocabulary: '18w',                // all 18 
+    vocabulary: 'directional4w',  // only up down left right
+   // vocabulary: '18w',                // all 18 
     probabilityThreshold: 0.85,
   };
   
-    
- // try '18w' and find all the words   
-    
- // document.getElementById('start').addEventListener('click', () => {
-  //  startListening(recognizerOptions, onDetection);
- // });
-  
- // document.getElementById('stop').addEventListener('click', stopListening);
-    
- // messageArea = document.getElementById('last-detected');
 }
 
-//document.addEventListener("DOMContentLoaded", function() {
- // 
-    
-    
-//});
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -118,12 +84,7 @@ function setupListeners() {
 
 
 <h2 align=center>tensorflow-models/speech-commands easiest example </h2>
-I am able to understand 18 speech commands:<br>
-0, 1, 2, 3, 4, 5, 6,7 8, 9,<br>  
-"up", "down", "left", "right", <br>
-"go", "stop", "yes", "no", <br>
-"unknown word" , "background noise".
-<br><br>
+
 <div id="myDiv01">...</div><br><br>
 
 
@@ -147,7 +108,16 @@ I am able to understand 18 speech commands:<br>
    stopListening()
    console.log('Stop Listening')
 
-}">  <br>      
+}">  <br> <br> <br>      
         
         
-Original example by @tafsiri at <a href="https://glitch.com/~tfjs-speech-commands">https://glitch.com/~tfjs-speech-commands</a><br>
+Original example by @tafsiri at <a href="https://glitch.com/~tfjs-speech-commands">https://glitch.com/~tfjs-speech-commands</a><br><br><br>
+                                                                                  
+This website is able to understand 18 speech commands:<br>
+0, 1, 2, 3, 4, 5, 6,7 8, 9,<br>  
+"up", "down", "left", "right", <br>
+"go", "stop", "yes", "no", <br>
+"unknown word" , "background noise".
+<br><br>
+                                   
+                                   
