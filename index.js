@@ -26,7 +26,7 @@
 //let SpeechCommands = speech-commands;
 
 
-console.log(SpeechCommands.version())
+console.log(speech-commands.version)
 
 const startButton = document.getElementById('start');
 const stopButton = document.getElementById('stop');
