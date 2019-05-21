@@ -19,6 +19,7 @@
 /* globals speechCommands */
 let recognizer;
 let messageArea;
+let recognizerOptions;    // needed this global
 
 const MESSAGES = {
   'up': '👍',
@@ -73,7 +74,8 @@ function onDetection(detectionResult) {
 }
 
 function setupListeners() {
-  const recognizerOptions = {
+  //const recognizerOptions = {
+  recognizerOptions = {
     vocabulary: 'directional4w',
     probabilityThreshold: 0.85,
   };
