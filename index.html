@@ -38,7 +38,7 @@ async function startListening(options, onResult) {
   await recognizer.ensureModelLoaded();
 //  document.getElementById('container').classList.remove('before-load');
   const words = recognizer.wordLabels();  
-    
+  console.log(words)  
   recognizer.params().sampleRateHz = 48000
     
   console.log('recognizer.params().sampleRateHz');
