@@ -4,6 +4,11 @@ edited by @rocksetta May 20th, 2019
 
 Demo page at https://hpssjellis.github.io/tfjs-models-purejs-speech-commands/
 
+newest attempt
+
+https://hpssjellis.github.io/tfjs-models-purejs-speech-commands/index-new.html
+
+
 
 
 
