@@ -36,7 +36,7 @@ async function startListening(options, onResult) {
   
   recognizer = speechCommands.create('BROWSER_FFT', vocabulary);
   await recognizer.ensureModelLoaded();
-  document.getElementById('container').classList.remove('before-load');
+//  document.getElementById('container').classList.remove('before-load');
   const words = recognizer.wordLabels();  
   
   recognizer.listen(result => {    
