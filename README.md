@@ -1,5 +1,14 @@
 # Speech Command Recognizer
 
+edited by @rocksetta May 20th, 2019
+
+Demo page at https://hpssjellis.github.io/tfjs-models-purejs-speech-commands/
+
+
+
+
+
+
 The Speech Command Recognizer is a JavaScript module that enables
 recognition of spoken commands comprised of simple isolated English
 words from a small vocabulary. The default vocabulary includes the following
