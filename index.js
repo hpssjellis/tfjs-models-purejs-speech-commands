@@ -15,13 +15,13 @@
  * =============================================================================
  */
 
-import Plotly from 'plotly.js-dist';
-import * as tf from '@tensorflow/tfjs';
+//import Plotly from 'plotly.js-dist';
+//import * as tf from '@tensorflow/tfjs';
 
-import * as SpeechCommands from '../src';
+//import * as SpeechCommands from '../src';
 
-import {hideCandidateWords, logToStatusDisplay, plotPredictions, plotSpectrogram, populateCandidateWords, showCandidateWords} from './ui';
-import {DatasetViz, removeNonFixedChildrenFromWordDiv} from './dataset-vis';
+//import {hideCandidateWords, logToStatusDisplay, plotPredictions, plotSpectrogram, populateCandidateWords, showCandidateWords} from './ui';
+//import {DatasetViz, removeNonFixedChildrenFromWordDiv} from './dataset-vis';
 
 const startButton = document.getElementById('start');
 const stopButton = document.getElementById('stop');
