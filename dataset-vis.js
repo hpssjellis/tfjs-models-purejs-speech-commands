@@ -15,12 +15,13 @@
  * =============================================================================
  */
 
-import * as speechCommands from '../src';
+//import * as speechCommands from '../src';
 
-import {plotSpectrogram} from './ui';
+//import {plotSpectrogram} from './ui';
 
 /** Remove the children of a div that do not have the isFixed attribute. */
-export function removeNonFixedChildrenFromWordDiv(wordDiv) {
+//export function removeNonFixedChildrenFromWordDiv(wordDiv) {
+function removeNonFixedChildrenFromWordDiv(wordDiv) {
   for (let i = wordDiv.children.length - 1; i >=0; --i) {
     if (wordDiv.children[i].getAttribute('isFixed') == null) {
       wordDiv.removeChild(wordDiv.children[i]);
@@ -57,7 +58,8 @@ function getCanvasClickRelativeXCoordinate(canvasElement, event) {
  * - Navigation through examples
  * - Deletion of examples
  */
-export class DatasetViz {
+//export class DatasetViz {
+class DatasetViz {
   /**
    * Constructor of DatasetViz
    *
