@@ -115,6 +115,8 @@ I am able to understand four speech commands. Up, down, left and right.<br><br>
 <input type=button value=Setup Model" onclick="{
    setupListeners()
        console.log('Speech Commands Setup')
+       console.log(recognizer.params().sampleRateHz);
+       console.log(recognizer.params().fftSize);
 }">
     
 
