@@ -1,0 +1,148 @@
+
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands"></script>
+    -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.1.2"> </script> 
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands@0.3.6"> </script> 
+    <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+
+
+<script>
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////// Start original script.js /////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+/* globals speechCommands */
+let recognizer;
+let recognizerOptions;    // needed this global
+
+async function startListening(options, onResult) {
+  const {vocabulary, probabilityThreshold} = options;  
+  recognizer = speechCommands.create('BROWSER_FFT', vocabulary);
+  await recognizer.ensureModelLoaded();
+  const words = recognizer.wordLabels();  
+  console.log(speechCommands)
+  console.log(words)  
+  recognizer.params().sampleRateHz = 48000
+    
+  console.log('recognizer.params().sampleRateHz');
+  console.log(recognizer.params().sampleRateHz);
+  //console.log(recognizer.params().fftSize);
+  
+  recognizer.listen(result => {    
+    const maxScore = Math.max(...result.scores);    
+    const maxScoreIndex = result.scores.indexOf(maxScore);    
+    const detectedWord = words[maxScoreIndex];    
+    
+    // Don't trigger on background noise or unknown.
+    if (maxScore > probabilityThreshold && maxScoreIndex < 4) {
+      onResult({
+        detectedWord,
+        detectedWordScore: maxScore,
+        scores: Array.from(result.scores),
+      });
+    }
+  });
+  
+}
+
+async function stopListening() {
+  if (recognizer!= null) {
+    recognizer.stopListening()
+  }
+}
+
+function onDetection(detectionResult) {
+//  console.log('ondetection', detectionResult);
+  const { detectedWord } = detectionResult;
+  console.log(detectionResult)
+ // console.log(detectedWord)
+  document.getElementById('myDiv01').innerHTML = detectedWord
+   
+    
+    // Note: speaking seems to mess up the sensing unless you have headphones
+ // setTimeout(function(){    
+    if (detectedWord == 'left'){ responsiveVoice.speak('Why do you want to go west?', 'US English Female', {pitch: 1, rate: 1, volume : 1}) }  
+    if (detectedWord == 'right'){ responsiveVoice.speak('Going to the east', 'US English Female', {pitch: 1, rate: 1, volume : 1}) }    
+    if (detectedWord == 'up'){ responsiveVoice.speak('North, you really want to go North?', 'US English Female', {pitch: 1, rate: 1, volume : 1}) }   
+    if (detectedWord == 'down'){ responsiveVoice.speak('Going South now', 'US English Female', {pitch: 1, rate: 1, volume : 1}) }    
+ // }, 30);
+  
+    
+    
+}
+
+function setupListeners() {
+  //const recognizerOptions = {
+  recognizerOptions = {
+    vocabulary: 'directional4w',        // only: up down left right
+   // vocabulary: '18w',                // all 18 words
+    probabilityThreshold: 0.85,
+  };
+  
+}
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////// End original script.js /////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
+</script>
+
+
+
+<h2 align=center>tensorflow-models/speech-commands easiest example </h2>
+
+<div id="myDiv01">...</div><br><br>
+
+
+
+<input type=button value=Setup Model" onclick="{
+   setupListeners()
+       console.log('Speech Commands Setup')
+      // console.log(recognizerOptions);
+      // console.log(recognizerOptions.params().sampleRateHz);
+      // console.log(recognizerOptions.params().fftSize);
+       // want 48000
+}">
+    
+
+<input type=button value="Start" onclick="{
+   console.log('Started listening')    
+   startListening(recognizerOptions, onDetection);
+}">
+        
+<input type=button value="Stop" onclick="{
+   stopListening()
+   console.log('Stop Listening')
+
+}"> 
+  
+ <input  type="button" value="initilize speak" onclick="{  
+    responsiveVoice.speak('Test for speaking', 'US English Female', 
+{pitch: 1, rate: 1, volume : 1})                                              
+}"> 
+  
+  
+  <br> <br> <br>      
+        
+        
+Original example by @tafsiri at <a href="https://glitch.com/~tfjs-speech-commands">https://glitch.com/~tfjs-speech-commands</a><br><br><br>
+                                                                                  
+This website is able to understand 4 speech commands, it works best if you use headphones or an external speaker:<br>
+
+"up", "down", "left", "right", <br><br>
+Still testing the full 18 commands:<br>
+                             
+0, 1, 2, 3, 4, 5, 6,7 8, 9,<br>  
+"go", "stop", "yes", "no", <br>
+"unknown word" , "background noise".
+<br><br>
+                                   
+            
