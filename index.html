@@ -6,6 +6,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.1.2"> </script> 
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands@0.3.6"> </script> 
+    <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
 
 
 <script>
@@ -108,7 +109,15 @@ function setupListeners() {
    stopListening()
    console.log('Stop Listening')
 
-}">  <br> <br> <br>      
+}"> 
+  
+ <input  type="button" value="initilize speak" onclick="{  
+    responsiveVoice.speak('Test for speaking', 'US English Female', 
+{pitch: 1, rate: 1, volume : 1})                                              
+}"> 
+  
+  
+  <br> <br> <br>      
         
         
 Original example by @tafsiri at <a href="https://glitch.com/~tfjs-speech-commands">https://glitch.com/~tfjs-speech-commands</a><br><br><br>
