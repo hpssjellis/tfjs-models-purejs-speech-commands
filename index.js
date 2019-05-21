@@ -23,7 +23,7 @@
 //import {hideCandidateWords, logToStatusDisplay, plotPredictions, plotSpectrogram, populateCandidateWords, showCandidateWords} from './ui';
 //import {DatasetViz, removeNonFixedChildrenFromWordDiv} from './dataset-vis';
 
-let SpeechCommands = speech-commands;
+//let SpeechCommands = speech-commands;
 
 
 
