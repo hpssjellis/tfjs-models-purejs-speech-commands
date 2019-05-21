@@ -23,6 +23,11 @@
 //import {hideCandidateWords, logToStatusDisplay, plotPredictions, plotSpectrogram, populateCandidateWords, showCandidateWords} from './ui';
 //import {DatasetViz, removeNonFixedChildrenFromWordDiv} from './dataset-vis';
 
+let SpeechCommands = speech-commands;
+
+
+
+
 const startButton = document.getElementById('start');
 const stopButton = document.getElementById('stop');
 const predictionCanvas = document.getElementById('prediction-canvas');
