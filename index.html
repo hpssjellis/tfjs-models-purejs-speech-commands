@@ -31,7 +31,7 @@ const MESSAGES = {
 async function startListening(options, onResult) {
   const {vocabulary, probabilityThreshold} = options;
   
-  document.getElementById('start').disabled = true;
+ // document.getElementById('start').disabled = true;
   
   
   recognizer = speechCommands.create('BROWSER_FFT', vocabulary);
@@ -60,8 +60,8 @@ async function startListening(options, onResult) {
 async function stopListening() {
   if (recognizer!= null) {
     recognizer.stopListening()
-    document.getElementById('stop').disabled = true;
-    document.getElementById('start').disabled = false;
+  //  document.getElementById('stop').disabled = true;
+   // document.getElementById('start').disabled = false;
     messageArea.class = '';
   }
 }
