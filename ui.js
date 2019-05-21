@@ -68,7 +68,8 @@ function populateCandidateWords(words) {
 }
 
 function hideCandidateWords() {
-export function hideCandidateWords() {
+//export function hideCandidateWords() {
+  function hideCandidateWords() {
   candidateWordsContainer.classList.add('candidate-words-hidden');
 }
 
