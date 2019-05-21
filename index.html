@@ -38,6 +38,11 @@ async function startListening(options, onResult) {
   await recognizer.ensureModelLoaded();
 //  document.getElementById('container').classList.remove('before-load');
   const words = recognizer.wordLabels();  
+    
+    
+    
+       console.log(recognizer.params().sampleRateHz);
+       console.log(recognizer.params().fftSize);
   
   recognizer.listen(result => {    
     const maxScore = Math.max(...result.scores);    
@@ -116,9 +121,9 @@ I am able to understand four speech commands. Up, down, left and right.<br><br>
 <input type=button value=Setup Model" onclick="{
    setupListeners()
        console.log('Speech Commands Setup')
-       console.log(recognizerOptions);
-       console.log(recognizerOptions.params().sampleRateHz);
-       console.log(recognizerOptions.params().fftSize);
+      // console.log(recognizerOptions);
+      // console.log(recognizerOptions.params().sampleRateHz);
+      // console.log(recognizerOptions.params().fftSize);
        // want 48000
 }">
     
