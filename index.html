@@ -39,10 +39,11 @@ async function startListening(options, onResult) {
 //  document.getElementById('container').classList.remove('before-load');
   const words = recognizer.wordLabels();  
     
+  recognizer.params().sampleRateHz = 48000
     
-    
-       console.log(recognizer.params().sampleRateHz);
-       console.log(recognizer.params().fftSize);
+  console.log('recognizer.params().sampleRateHz');
+  console.log(recognizer.params().sampleRateHz);
+  //console.log(recognizer.params().fftSize);
   
   recognizer.listen(result => {    
     const maxScore = Math.max(...result.scores);    
@@ -129,11 +130,13 @@ I am able to understand four speech commands. Up, down, left and right.<br><br>
     
 
 <input type=button value="Start" onclick="{
+   console.log('Started listening')    
    startListening(recognizerOptions, onDetection);
 }">
         
 <input type=button value="Stop" onclick="{
    stopListening()
+   console.log('Stop Listening')
 
 }">  <br>      
         
