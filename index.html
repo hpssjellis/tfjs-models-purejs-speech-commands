@@ -78,6 +78,7 @@ function onDetection(detectionResult) {
  // messageArea.innerHTML = MESSAGES[detectedWord];
   //messageArea.className = detectedWord;
     console.log(detectedWord)
+    document.getElementById('myDiv01').innerHTML = 'wow'
 }
 
 function setupListeners() {
@@ -114,7 +115,11 @@ function setupListeners() {
 
 
 <h2 align=center>tensorflow-models/speech-commands easiest example </h2>
-I am able to understand four speech commands. Up, down, left and right.<br><br>
+I am able to understand 18 speech commands: 0, 1, 2, 3, 4, 5, 6,7 8, 9,<br>  
+"up", "down", "left", "right", <br>
+"go", "stop", "yes", "no", <br>
+"unknown word" , "background noise".
+<br><br>
 <div id="myDiv01">...</div><br><br>
 
 
