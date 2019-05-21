@@ -77,8 +77,9 @@ function onDetection(detectionResult) {
   const { detectedWord } = detectionResult;
  // messageArea.innerHTML = MESSAGES[detectedWord];
   //messageArea.className = detectedWord;
+    console.log(detectionResult)
     console.log(detectedWord)
-    document.getElementById('myDiv01').innerHTML = detectedWord[0].detectedWord
+    document.getElementById('myDiv01').innerHTML = detectedWord
 }
 
 function setupListeners() {
