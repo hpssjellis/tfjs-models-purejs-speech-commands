@@ -6,16 +6,108 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.1.2"> </script> 
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands@0.3.6"> </script> 
 
+
+<script>
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////// Start original script.js /////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+/* globals speechCommands */
+let recognizer;
+let messageArea;
+
+const MESSAGES = {
+  'up': '👍',
+  'down': '🙃',
+  'left': '👈',
+  'right': '➡️',
+}
+
+async function startListening(options, onResult) {
+  const {vocabulary, probabilityThreshold} = options;
+  
+  document.getElementById('start').disabled = true;
+  
+  
+  recognizer = speechCommands.create('BROWSER_FFT', vocabulary);
+  await recognizer.ensureModelLoaded();
+  document.getElementById('container').classList.remove('before-load');
+  const words = recognizer.wordLabels();  
+  
+  recognizer.listen(result => {    
+    const maxScore = Math.max(...result.scores);    
+    const maxScoreIndex = result.scores.indexOf(maxScore);    
+    const detectedWord = words[maxScoreIndex];    
+    
+    // Don't trigger on background noise or unknown.
+    if (maxScore > probabilityThreshold && maxScoreIndex < 4) {
+      onResult({
+        detectedWord,
+        detectedWordScore: maxScore,
+        scores: Array.from(result.scores),
+      });
+    }
+  });
+  
+  document.getElementById('stop').disabled = false;
+}
+
+async function stopListening() {
+  if (recognizer!= null) {
+    recognizer.stopListening()
+    document.getElementById('stop').disabled = true;
+    document.getElementById('start').disabled = false;
+    messageArea.class = '';
+  }
+}
+
+function onDetection(detectionResult) {
+  console.log('ondetection', detectionResult);
+  const { detectedWord } = detectionResult;
+  messageArea.innerHTML = MESSAGES[detectedWord];
+  messageArea.className = detectedWord;
+}
+
+function setupListeners() {
+  const recognizerOptions = {
+    vocabulary: 'directional4w',
+    probabilityThreshold: 0.85,
+  };
+  
+  document.getElementById('start').addEventListener('click', () => {
+    startListening(recognizerOptions, onDetection);
+  });
+  
+  document.getElementById('stop').addEventListener('click', stopListening);
+    
+  messageArea = document.getElementById('last-detected');
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  setupListeners();
+});
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////// End original script.js /////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
+</script>
+
+
+
 <h2 align=center>tensorflow-models/speech-commands easiest example </h2>
 I am able to understand four speech commands. Up, down, left and right.<br><br>
 <div id="myDiv01">...</div><br><br>
 <input type=button value="Start" onclick="{
-
-
+   startListening(recognizerOptions, onDetection);
 }">
         
 <input type=button value="Stop" onclick="{
-
+stopListening()
 
 }">  <br>      
         
