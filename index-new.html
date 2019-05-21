@@ -26,10 +26,14 @@ async function startListening(options, onResult) {
   const {vocabulary, probabilityThreshold} = options;  
   recognizer = speechCommands.create('BROWSER_FFT', vocabulary);
   await recognizer.ensureModelLoaded();
-  const words = recognizer.wordLabels();  
-  console.log(speechCommands)
+  const words = recognizer.wordLabels(); 
     
-   speechCommands.clearExamples() // trying to mess things up!!!!
+  console.log('speechCommands')
+  console.log(speechCommands)
+  console.log('recognizer')
+  console.log(recognizer)
+    
+   recognizer.clearExamples() // trying to mess things up!!!!
     
     
   console.log(words)  
