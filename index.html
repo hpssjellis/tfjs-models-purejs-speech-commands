@@ -64,16 +64,16 @@ function onDetection(detectionResult) {
  // console.log(detectedWord)
   document.getElementById('myDiv01').innerHTML = detectedWord
    
-    /*
     
-  setTimeout(function(){    
+    // Note: speaking seems to mess up the sensing unless you have headphones
+ // setTimeout(function(){    
     if (detectedWord == 'left'){ responsiveVoice.speak('Why do you want to go west?', 'US English Female', {pitch: 1, rate: 1, volume : 1}) }  
     if (detectedWord == 'right'){ responsiveVoice.speak('Going to the east', 'US English Female', {pitch: 1, rate: 1, volume : 1}) }    
     if (detectedWord == 'up'){ responsiveVoice.speak('North, you really want to go North?', 'US English Female', {pitch: 1, rate: 1, volume : 1}) }   
     if (detectedWord == 'down'){ responsiveVoice.speak('Going South now', 'US English Female', {pitch: 1, rate: 1, volume : 1}) }    
-  }, 30);
+ // }, 30);
   
-    */
+    
     
 }
 
