@@ -28,28 +28,18 @@ async function startListening(options, onResult) {
   await recognizer.ensureModelLoaded();
   const words = recognizer.wordLabels(); 
     
-  console.log('speechCommands')
-  console.log(speechCommands)
-  console.log('recognizer')
-  console.log(recognizer)
-   
-   // console.log(speechCommands.listSavedTransferModels)
-  // recognizer.clearExamples() // trying to mess things up!!!!
-    
-    
-    
-    
-    
-    
-    const serialized = recognizer.serializeExamples()
-    
-    console.log('serialized')
-    console.log(serialized)
-    
     
   console.log('words')  
   console.log(words)  
   recognizer.params().sampleRateHz = 48000
+    
+    
+    
+  console.log('speechCommands')
+  console.log(speechCommands)
+  console.log('recognizer')
+  console.log(recognizer)
+    
     
   console.log('recognizer.params().sampleRateHz');
   console.log(recognizer.params().sampleRateHz);
