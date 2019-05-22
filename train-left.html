@@ -77,16 +77,16 @@ function onDetection(detectionResult) {
 <input type=button value="train left" onclick="{
 
 (async function(){       
-  const NewRecognizer = speechCommands.create('BROWSER_FFT', 'directional4w');
-  await NewRecognizer.ensureModelLoaded();
-  NewRecognizer.params().sampleRateHz = 48000
+  newRecognizer = speechCommands.create('BROWSER_FFT', 'directional4w');
+  await newRecognizer.ensureModelLoaded();
+  newRecognizer.params().sampleRateHz = 48000
   
-  console.log('NewRecognizer.wordLabels()')  
-  console.log(NewRecognizer.wordLabels())   
+  console.log('newRecognizer.wordLabels()')  
+  console.log(newRecognizer.wordLabels())   
   
   /*
   
-  const transferRecognizer = NewRecognizer.createTransfer('directional4w');
+  const transferRecognizer = newRecognizer.createTransfer('directional4w');
   console.log('say left')     
   await transferRecognizer.collectExample('left');
   console.log('say left')     
@@ -106,8 +106,8 @@ function onDetection(detectionResult) {
     
     
     
-  console.log('NewRecognizer.wordLabels()')  
-  console.log(NewRecognizer.wordLabels())        
+  console.log('newRecognizer.wordLabels()')  
+  console.log(newRecognizer.wordLabels())        
        
  })()   
  
