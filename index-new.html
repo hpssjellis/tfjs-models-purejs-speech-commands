@@ -142,17 +142,32 @@ function setupListeners() {
          
 <input type=button value="train left" onclick="{
 
- (async function(){       
+(async function(){       
   const NewRecognizer = speechCommands.create('BROWSER_FFT', 'directional4w');
   await NewRecognizer.ensureModelLoaded();
   
   console.log('NewRecognizer.wordLabels()')  
   console.log(NewRecognizer.wordLabels())   
+  console.log('NewRecognizer.getFeatures()')   
+  console.log(NewRecognizer.getFeatures())   
+       
+       
+       
   const transferRecognizer = NewRecognizer.createTransfer('directional4w');
+       
+  await transferRecognizer.collectExample('left');
+  await transferRecognizer.collectExample('left');
+  await transferRecognizer.collectExample('left');
+  await transferRecognizer.collectExample('left');
+  await transferRecognizer.collectExample('left');
+       
   console.log('transferRecognizer.countExamples()');      
   console.log(transferRecognizer.countExamples());      
        
-      })()   
+       
+       
+       
+ })()   
        
        
 
