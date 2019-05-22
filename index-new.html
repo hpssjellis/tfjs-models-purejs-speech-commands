@@ -141,8 +141,21 @@ function setupListeners() {
   
          
 <input type=button value="train left" onclick="{
-const transferRecognizer = recognizer.createTransfer();
-console.log(transferRecognizer.countExamples());
+//const transferRecognizer = recognizer.createTransfer('fix-left');
+//console.log(transferRecognizer.countExamples());
+       
+  const NewRecognizer = speechCommands.create('BROWSER_FFT', 'directional4w');
+  await NewRecognizer.ensureModelLoaded();
+  const words = NewRecognizer.wordLabels();   
+  console.log('words')  
+  console.log(words)   
+  const transferRecognizer = NewRecognizer.createTransfer('fix-left');
+  console.log('transferRecognizer.countExamples()');      
+  console.log(transferRecognizer.countExamples());      
+       
+       
+       
+       
 
 }"> 
   
@@ -162,7 +175,7 @@ console.log(transferRecognizer.countExamples());
   
   
   
-  
+ 
    
  <input  type="button" value="testing" onclick="{  
 
