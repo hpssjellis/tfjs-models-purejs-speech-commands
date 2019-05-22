@@ -145,6 +145,7 @@ function setupListeners() {
 (async function(){       
   const NewRecognizer = speechCommands.create('BROWSER_FFT', 'directional4w');
   await NewRecognizer.ensureModelLoaded();
+  NewRecognizer.params().sampleRateHz = 48000
   
   console.log('NewRecognizer.wordLabels()')  
   console.log(NewRecognizer.wordLabels())   
@@ -166,8 +167,10 @@ function setupListeners() {
   console.log('Done')     
        
   console.log('transferRecognizer.countExamples()');      
-  console.log(transferRecognizer.countExamples());      
+  console.log(transferRecognizer.countExamples());   
        
+  console.log('NewRecognizer.wordLabels()')  
+  console.log(NewRecognizer.wordLabels())        
        
        
        
