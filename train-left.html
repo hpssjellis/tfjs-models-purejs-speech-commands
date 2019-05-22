@@ -29,6 +29,8 @@ let  newRecognizerOptions = {
 async function startListening(options, onResult) {
   const {vocabulary, probabilityThreshold} = options;  
   const words = newRecognizer.wordLabels(); 
+  console.log('words')  
+  console.log(words) 
     
   newRecognizer.listen(result => {    
     const maxScore = Math.max(...result.scores);    
