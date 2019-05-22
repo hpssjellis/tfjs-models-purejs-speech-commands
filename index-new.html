@@ -141,7 +141,8 @@ function setupListeners() {
   
          
 <input type=button value="train left" onclick="{
-console.log(recognizer.countExamples());
+const transferRecognizer = recognizer.createTransfer('fix-left');
+console.log(transferRecognizer.countExamples());
 
 }"> 
   
