@@ -21,11 +21,14 @@
 /* globals speechCommands */
 let newRecognizer;
 let newRecognizerOptions = {
-      // vocabulary: 'directional4w',        // only: up down left right
-        vocabulary: '18w',                // all 18 words
+       vocabulary: 'directional4w',        // only: up down left right
+      //  vocabulary: '18w',                // all 18 words
        probabilityThreshold: 0.85,
     };
 
+    
+    
+    
 async function startListening(options, onResult) {
   const {vocabulary, probabilityThreshold} = options;  
   const words = newRecognizer.wordLabels(); 
@@ -79,12 +82,10 @@ function onDetection(detectionResult) {
  <input type=button value="No Train" onclick="{
 
 (async function(){       
-  //newRecognizer = speechCommands.create('BROWSER_FFT', 'directional4w');
-  newRecognizer = speechCommands.create('BROWSER_FFT', '18w');
+  newRecognizer = speechCommands.create('BROWSER_FFT', newRecognizerOptions.vocabulary);
   await newRecognizer.ensureModelLoaded();
   newRecognizer.params().sampleRateHz = 48000
-  //const transferRecognizer = newRecognizer.createTransfer('directional4w');
-  const transferRecognizer = newRecognizer.createTransfer('18w');
+  const transferRecognizer = newRecognizer.createTransfer(newRecognizerOptions.vocabulary);
   console.log('Starting Listener')      
   startListening(newRecognizerOptions, onDetection);  
                                                
@@ -97,8 +98,7 @@ function onDetection(detectionResult) {
 <input type=button value="train left" onclick="{
 
 (async function(){       
-  //newRecognizer = speechCommands.create('BROWSER_FFT', 'directional4w');
-  newRecognizer = speechCommands.create('BROWSER_FFT', '18w');
+  newRecognizer = speechCommands.create('BROWSER_FFT', newRecognizerOptions.vocabulary);
   await newRecognizer.ensureModelLoaded();
   newRecognizer.params().sampleRateHz = 48000
   
@@ -107,8 +107,7 @@ function onDetection(detectionResult) {
   
   
   
-  //const transferRecognizer = newRecognizer.createTransfer('directional4w');
-  const transferRecognizer = newRecognizer.createTransfer('18w');
+  const transferRecognizer = newRecognizer.createTransfer(newRecognizerOptions.vocabulary);
   console.log('say left')     
   await transferRecognizer.collectExample('left');
   console.log('say left')     
