@@ -76,7 +76,22 @@ function onDetection(detectionResult) {
 
 <div id="myDiv01">...</div><br><br>
 
-           
+ <input type=button value="No Train" onclick="{
+
+(async function(){       
+  newRecognizer = speechCommands.create('BROWSER_FFT', 'directional4w');
+  await newRecognizer.ensureModelLoaded();
+  newRecognizer.params().sampleRateHz = 48000
+  const transferRecognizer = newRecognizer.createTransfer('directional4w');
+  console.log('Starting Listener')      
+  startListening(newRecognizerOptions, onDetection);  
+                                               
+ })()  // end inline async
+                                               
+}"> 
+
+
+
 <input type=button value="train left" onclick="{
 
 (async function(){       
