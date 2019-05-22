@@ -151,7 +151,7 @@ function setupListeners() {
    
  <input  type="button" value="testing" onclick="{  
 
-       
+  async function(){     
   const baseRecognizer = speechCommands.create('BROWSER_FFT');
 await baseRecognizer.ensureModelLoaded();
 
@@ -211,7 +211,10 @@ await transferRecognizer.listen(result => {
 
 // Stop the recognition in 10 seconds.
 setTimeout(() => transferRecognizer.stopListening(), 10e3);     
-       
+ 
+      
+      
+      }()
        
 }"> 
   
