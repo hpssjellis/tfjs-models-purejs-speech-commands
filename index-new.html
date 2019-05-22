@@ -212,9 +212,16 @@ await transferRecognizer.listen(result => {
 // Stop the recognition in 10 seconds.
 setTimeout(() => transferRecognizer.stopListening(), 10e3);     
  
+      const serialized = transferRecognizer.serializeExamples();
       
+      const clearExisting = false;
+      newTransferRecognizer.loadExamples(serialized, clearExisting);      
       
       })()
+      
+      
+      
+
        
 }"> 
   
