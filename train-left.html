@@ -112,11 +112,13 @@ function onDetection(detectionResult) {
   console.log('newRecognizer.wordLabels()')  
   console.log(newRecognizer.wordLabels())        
        
- })()   
+ 
  
  console.log('Starting Listener')      
- startListening(newRecognizerOptions, onDetection);     
-
+ startListening(newRecognizerOptions, onDetection);  
+                                               
+ })()  // end inline async
+                                               
 }"> 
   
    
