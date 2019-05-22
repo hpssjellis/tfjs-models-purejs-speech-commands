@@ -154,6 +154,8 @@ function setupListeners() {
  (async function(){     
   const baseRecognizer = speechCommands.create('BROWSER_FFT');
 await baseRecognizer.ensureModelLoaded();
+       
+baseRecognizer.params().sampleRateHz = 48000
 
 // Each instance of speech-command recognizer supports multiple
 // transfer-learning models, each of which can be trained for a different
