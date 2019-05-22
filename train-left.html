@@ -97,7 +97,8 @@ function onDetection(detectionResult) {
 <input type=button value="train left" onclick="{
 
 (async function(){       
-  newRecognizer = speechCommands.create('BROWSER_FFT', 'directional4w');
+  //newRecognizer = speechCommands.create('BROWSER_FFT', 'directional4w');
+  newRecognizer = speechCommands.create('BROWSER_FFT', '18w');
   await newRecognizer.ensureModelLoaded();
   newRecognizer.params().sampleRateHz = 48000
   
@@ -106,7 +107,8 @@ function onDetection(detectionResult) {
   
   
   
-  const transferRecognizer = newRecognizer.createTransfer('directional4w');
+  //const transferRecognizer = newRecognizer.createTransfer('directional4w');
+  const transferRecognizer = newRecognizer.createTransfer('18w');
   console.log('say left')     
   await transferRecognizer.collectExample('left');
   console.log('say left')     
