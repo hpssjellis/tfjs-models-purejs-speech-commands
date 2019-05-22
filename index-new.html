@@ -162,7 +162,13 @@ baseRecognizer.params().sampleRateHz = 48000
 // new vocabulary.
 // Therefore we give a name to the transfer-learning model we are about to
 // train ('colors' in this case).
+       
+       
+       
 const transferRecognizer = baseRecognizer.createTransfer('colors');
+        
+       
+       
 
 // Call `collectExample()` to collect a number of audio examples
 // via WebAudio.
@@ -216,9 +222,15 @@ setTimeout(() => transferRecognizer.stopListening(), 10e3);
  
       const serialized = transferRecognizer.serializeExamples();
       
-      const clearExisting = false;
-      newTransferRecognizer.loadExamples(serialized, clearExisting);      
       
+      const newTransferRecognizer = baseRecognizer.createTransfer('fred');
+      
+      
+      const clearExisting = false;
+      
+      
+      newTransferRecognizer.loadExamples(serialized, clearExisting);      
+      console.log(newTransferRecognizer)
       })()
       
       
