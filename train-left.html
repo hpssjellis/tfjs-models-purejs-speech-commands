@@ -1,0 +1,165 @@
+
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands"></script>
+    -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.1.2"> </script> 
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands@0.3.6"> </script> 
+    <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+
+
+<script>
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////// Start original script.js /////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+/* globals speechCommands */
+let NewRecognizer;
+let  newRecognizerOptions = {
+    vocabulary: 'directional4w',        // only: up down left right
+   // vocabulary: '18w',                // all 18 words
+    probabilityThreshold: 0.85,
+  };
+
+async function startListening(options, onResult) {
+  const {vocabulary, probabilityThreshold} = options;  
+
+  
+  newRecognizer.listen(result => {    
+    const maxScore = Math.max(...result.scores);    
+    const maxScoreIndex = result.scores.indexOf(maxScore);    
+    const detectedWord = words[maxScoreIndex];    
+    
+    // Don't trigger on background noise or unknown.
+    if (maxScore > probabilityThreshold && maxScoreIndex < 4) {
+      onResult({
+        detectedWord,
+        detectedWordScore: maxScore,
+        scores: Array.from(result.scores),
+      });
+    }
+  });
+  
+}
+
+async function stopListening() {
+  if (newRecognizer!= null) {
+    newRecognizer.stopListening()
+  }
+}
+
+function onDetection(detectionResult) {
+  const { detectedWord } = detectionResult;
+  console.log(detectionResult)
+  document.getElementById('myDiv01').innerHTML = detectedWord
+    
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////// End original script.js /////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
+</script>
+
+
+
+<h2 align=center>tensorflow-models/speech-commands easiest example </h2>
+
+<div id="myDiv01">...</div><br><br>
+
+
+
+<input type=button value=Setup Model" onclick="{
+   setupListeners()
+       console.log('Speech Commands Setup')
+      // console.log(recognizerOptions);
+      // console.log(recognizerOptions.params().sampleRateHz);
+      // console.log(recognizerOptions.params().fftSize);
+       // want 48000
+}">
+    
+
+<input type=button value="Start" onclick="{
+   console.log('Started listening')    
+   startListening(recognizerOptions, onDetection);
+}">
+        
+<input type=button value="Stop" onclick="{
+   stopListening()
+   console.log('Stop Listening')
+
+}"> 
+  
+         
+<input type=button value="train left" onclick="{
+
+(async function(){       
+  const NewRecognizer = speechCommands.create('BROWSER_FFT', 'directional4w');
+  await NewRecognizer.ensureModelLoaded();
+  NewRecognizer.params().sampleRateHz = 48000
+  
+  console.log('NewRecognizer.wordLabels()')  
+  console.log(NewRecognizer.wordLabels())   
+  
+  /*
+  
+  const transferRecognizer = NewRecognizer.createTransfer('directional4w');
+  console.log('say left')     
+  await transferRecognizer.collectExample('left');
+  console.log('say left')     
+  await transferRecognizer.collectExample('left');
+  console.log('say left')     
+  await transferRecognizer.collectExample('left');
+  console.log('say left')     
+  await transferRecognizer.collectExample('left');
+  console.log('say left')     
+  await transferRecognizer.collectExample('left');
+  console.log('Done')     
+       
+  console.log('transferRecognizer.countExamples()');      
+  console.log(transferRecognizer.countExamples());   
+    
+    */
+    
+    
+    
+  console.log('NewRecognizer.wordLabels()')  
+  console.log(NewRecognizer.wordLabels())        
+       
+ })()   
+ 
+ console.log('Starting Listener')      
+ startListening(newRecognizerOptions, onDetection);     
+
+}"> 
+  
+   
+  
+<input type=button value="Stop" onclick="{
+   stopListening()
+   console.log('Stop Listening')
+
+}">   
+  
+  
+  
+
+  
+  
+  
+   
+  
+  
+  
+  
+  
+  
+                  
+            
