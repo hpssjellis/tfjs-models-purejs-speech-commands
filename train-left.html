@@ -63,8 +63,11 @@ async function startListening2(options, onResult) {
   transferRecognizer.listen(result => {    
     const maxScore = Math.max(...result.scores);    
     const maxScoreIndex = result.scores.indexOf(maxScore);    
-    const detectedWord = words[maxScoreIndex];    
-    
+    const detectedWord = words[maxScoreIndex];  
+      
+      for (let i = 0; i < words; ++i) {
+    console.log(`score for word '${words[i]}' = ${result.scores[i]}`);
+  }
     // Don't trigger on background noise or unknown.
     if (maxScore > probabilityThreshold && maxScoreIndex < 4) {
       onResult({
@@ -191,21 +194,7 @@ function onDetection(detectionResult) {
     
                                                                                 
                                                                                 
- // After the transfer learning completes, you can start online streaming
-// recognition using the new model.
-await transferRecognizer.listen(result => {
-  // - result.scores contains the scores for the new vocabulary, which
-  //   can be checked with:
-  const words = transferRecognizer.wordLabels();
-  // `result.scores` contains the scores for the new words, not the original
-  // words.
-  for (let i = 0; i < words; ++i) {
-    console.log(`score for word '${words[i]}' = ${result.scores[i]}`);
-  }
-}, {probabilityThreshold: 0.75});
-
-// Stop the recognition in 10 seconds.
-setTimeout(() => transferRecognizer.stopListening(), 30e3);                                                                               
+                                                                            
                                                                                 
                                                                                 
                                                                                 
