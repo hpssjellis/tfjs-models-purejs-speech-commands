@@ -124,7 +124,21 @@ function onDetection(detectionResult) {
   console.log(transferRecognizer.countExamples());   
     
     
-    
+     
+  await transferRecognizer.train({
+     epochs: 25,
+     callback: {
+        onEpochEnd: async (epoch, logs) => {
+           console.log(`Epoch ${epoch}: loss=${logs.loss}, accuracy=${logs.acc}`);
+        }
+    }
+  });
+ 
+  console.log('transferRecognizer.countExamples()');      
+  console.log(transferRecognizer.countExamples());   
+       
+  console.log('transferRecognizer.wordLabels()')  
+  console.log(transferRecognizer.wordLabels())      
     
     
   console.log('newRecognizer.wordLabels()')  
