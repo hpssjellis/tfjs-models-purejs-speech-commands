@@ -179,12 +179,29 @@ function onDetection(detectionResult) {
   console.log('transferRecognizer.wordLabels()')  
   console.log(transferRecognizer.wordLabels())      
     
- 
- 
- console.log('Starting Listener')      
-// startListening(newRecognizerOptions, onDetection);  // only uses the old one
-                                                                        
                                                                                 
+                                                                                
+ // After the transfer learning completes, you can start online streaming
+// recognition using the new model.
+await transferRecognizer.listen(result => {
+  // - result.scores contains the scores for the new vocabulary, which
+  //   can be checked with:
+  const words = transferRecognizer.wordLabels();
+  // `result.scores` contains the scores for the new words, not the original
+  // words.
+  for (let i = 0; i < words; ++i) {
+    console.log(`score for word '${words[i]}' = ${result.scores[i]}`);
+  }
+}, {probabilityThreshold: 0.75});
+
+// Stop the recognition in 10 seconds.
+setTimeout(() => transferRecognizer.stopListening(), 30e3);                                                                               
+                                                                                
+                                                                                
+                                                                                
+ 
+ 
+                                                                          
                                                                                 
                                                                                 
                                                
@@ -200,8 +217,9 @@ function onDetection(detectionResult) {
  <input type=button value="newly-Trained" onclick="{
 
 (async function(){       
-   
-  startListening2(newRecognizerOptions, onDetection);  
+   console.log('start listening')
+                                                   
+                                                   startListening2(newRecognizerOptions, onDetection);  
                                                
  })()  // end inline async
                                                
