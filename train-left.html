@@ -118,6 +118,10 @@ function onDetection(detectionResult) {
   await transferRecognizer.collectExample('left');
   console.log('say left')     
   await transferRecognizer.collectExample('left');
+  console.log('Now say Right')     
+  await transferRecognizer.collectExample('right');
+  console.log('Now say Right last time')     
+  await transferRecognizer.collectExample('right');
   console.log('Done')     
        
   console.log('transferRecognizer.countExamples()');      
