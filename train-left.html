@@ -155,8 +155,18 @@ function onDetection(detectionResult) {
   await transferRecognizer.collectExample('left');
   console.log('Now say Right')     
   await transferRecognizer.collectExample('right');
-  console.log('Now say Right last time')     
+  console.log('Now say Right')     
   await transferRecognizer.collectExample('right');
+  console.log('Now say Right')     
+  await transferRecognizer.collectExample('right');
+  console.log('Now say Right')     
+  await transferRecognizer.collectExample('right');
+  console.log('Now say Right')     
+  await transferRecognizer.collectExample('right');
+  console.log('Now say down')     
+  await transferRecognizer.collectExample('down');
+  console.log('Now say down')     
+  await transferRecognizer.collectExample('down');
   console.log('Done')     
        
   console.log('transferRecognizer.countExamples()');      
@@ -230,7 +240,7 @@ setTimeout(() => transferRecognizer.stopListening(), 30e3);
 
 
   
-<input type=button value="Stop" onclick="{
+<input type=button value="Stop both" onclick="{
    stopListening()
    stopListening2()
    console.log('Stop Listening')
