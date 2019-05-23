@@ -20,6 +20,7 @@
 
 /* globals speechCommands */
 let newRecognizer;
+let transferRecognizer;
 let newRecognizerOptions = {
        vocabulary: 'directional4w',        // only: up down left right
       //  vocabulary: '18w',                // all 18 words
@@ -52,9 +53,44 @@ async function startListening(options, onResult) {
   
 }
 
+    
+async function startListening2(options, onResult) {
+  const {vocabulary, probabilityThreshold} = options;  
+  const words = transferRecognizer.wordLabels(); 
+  console.log('words')  
+  console.log(words) 
+    
+  transferRecognizer.listen(result => {    
+    const maxScore = Math.max(...result.scores);    
+    const maxScoreIndex = result.scores.indexOf(maxScore);    
+    const detectedWord = words[maxScoreIndex];    
+    
+    // Don't trigger on background noise or unknown.
+    if (maxScore > probabilityThreshold && maxScoreIndex < 4) {
+      onResult({
+        detectedWord,
+        detectedWordScore: maxScore,
+        scores: Array.from(result.scores),
+      });
+    }
+  });
+  
+}    
+    
+    
+    
+    
+    
 async function stopListening() {
   if (newRecognizer!= null) {
     newRecognizer.stopListening()
+  }
+}
+    
+    
+async function stopListening2() {
+  if (transferRecognizer!= null) {
+    transferRecognizer.stopListening()
   }
 }
 
@@ -85,7 +121,6 @@ function onDetection(detectionResult) {
   newRecognizer = speechCommands.create('BROWSER_FFT', newRecognizerOptions.vocabulary);
   await newRecognizer.ensureModelLoaded();
   newRecognizer.params().sampleRateHz = 48000
-  const transferRecognizer = newRecognizer.createTransfer(newRecognizerOptions.vocabulary);
   console.log('Starting Listener')      
   startListening(newRecognizerOptions, onDetection);  
                                                
@@ -107,7 +142,7 @@ function onDetection(detectionResult) {
   
   
   
-  const transferRecognizer = newRecognizer.createTransfer(newRecognizerOptions.vocabulary);
+  transferRecognizer = newRecognizer.createTransfer(newRecognizerOptions.vocabulary);
   console.log('say left')     
   await transferRecognizer.collectExample('left');
   console.log('say left')     
@@ -148,17 +183,7 @@ function onDetection(detectionResult) {
  
  console.log('Starting Listener')      
 // startListening(newRecognizerOptions, onDetection);  // only uses the old one
-                                                                                
- await transferRecognizer.listen(result => {
-  // - result.scores contains the scores for the new vocabulary, which
-  //   can be checked with:
-  const words = transferRecognizer.wordLabels();
-  // `result.scores` contains the scores for the new words, not the original
-  // words.
-  for (let i = 0; i < words; ++i) {
-    console.log(`score for word '${words[i]}' = ${result.scores[i]}`);
-  }
-}, {probabilityThreshold: 0.75});                                                                               
+                                                                        
                                                                                 
                                                                                 
                                                                                 
@@ -168,9 +193,28 @@ function onDetection(detectionResult) {
 }"> 
   
    
+
+
+
+
+ <input type=button value="newly-Trained" onclick="{
+
+(async function(){       
+   
+  startListening2(newRecognizerOptions, onDetection);  
+                                               
+ })()  // end inline async
+                                               
+}"> 
+
+
+
+
+
   
 <input type=button value="Stop" onclick="{
    stopListening()
+   stopListening2()
    console.log('Stop Listening')
 
 }">   
