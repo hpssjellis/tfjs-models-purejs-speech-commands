@@ -169,18 +169,9 @@ function setupListeners() {
   console.log('transferRecognizer.countExamples()');      
   console.log(transferRecognizer.countExamples());   
        
-  console.log('NewRecognizer.wordLabels()')  
-  console.log(NewRecognizer.wordLabels())        
-  
-  await NewRecognizer.train({
-     epochs: 25,
-     callback: {
-        onEpochEnd: async (epoch, logs) => {
-           console.log(`Epoch ${epoch}: loss=${logs.loss}, accuracy=${logs.acc}`);
-        }
-    }
-  });
-       
+  console.log('transferRecognizer.wordLabels()')  
+  console.log(transferRecognizer.wordLabels())        
+      
        
  })()   
        
