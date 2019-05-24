@@ -225,9 +225,8 @@ function onDetection(detectionResult) {
  <input type=button value="newly-Trained" onclick="{
 
 (async function(){       
-   console.log('start listening')
-                                                   
-                                                   startListening2(newRecognizerOptions, onDetection);  
+   console.log('start trained listening')
+   startListening2(newRecognizerOptions, onDetection);  
                                                
  })()  // end inline async
                                                
@@ -239,9 +238,10 @@ function onDetection(detectionResult) {
 
   
 <input type=button value="Stop both" onclick="{
+  console.log('Stop both Listening')
    stopListening()
    stopListening2()
-   console.log('Stop Listening')
+
 
 }">   
   
