@@ -26,6 +26,7 @@
 /* globals speechCommands */
 let newRecognizer;
 let transferRecognizer;
+let serialized;
 let newRecognizerOptions = {
        vocabulary: 'directional4w',        // only: up down left right
       //  vocabulary: '18w',                // all 18 words
@@ -234,6 +235,31 @@ function onDetection(detectionResult) {
 }">   
   
   
+  
+<input type=button value="serializeExamples" onclick="{
+
+serialized = transferRecognizer.serializeExamples();
+
+}"> 
+
+
+  
+<input type=button value="loadExamples clear false" onclick="{
+
+  const clearExisting = false;
+  newTransferRecognizer.loadExamples(serialized, clearExisting);
+  startListening(newRecognizerOptions, onDetection);  
+}"> 
+
+<input type=button value="loadExamples clear true" onclick="{
+
+  const clearExisting = true;
+  newRecognizer.loadExamples(serialized, clearExisting);
+  startListening(newRecognizerOptions, onDetection);  
+}"> 
+
+
+
   
 
   
