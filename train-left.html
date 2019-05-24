@@ -176,7 +176,7 @@ function onDetection(detectionResult) {
     
      
   await transferRecognizer.train({
-     epochs: 25,
+     epochs: 2,
      callback: {
         onEpochEnd: async (epoch, logs) => {
            console.log(`Epoch ${epoch}: loss=${logs.loss}, accuracy=${logs.acc}`);
