@@ -185,8 +185,8 @@ function onDetection(detectionResult) {
     
   
                                                                                 
-   const myOptimizer = tf.train.sgd(0.00005);                                                                                        
-   transferRecognizer.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});                                                                               
+  // const myOptimizer = tf.train.sgd(0.00005);                                                                                        
+  // transferRecognizer.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});                                                                               
                                                                                 
                                                                                 
   await transferRecognizer.train({
