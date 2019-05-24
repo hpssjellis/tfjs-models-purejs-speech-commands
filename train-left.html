@@ -170,6 +170,10 @@ function onDetection(detectionResult) {
   await transferRecognizer.collectExample('down');
   console.log('Now say down')     
   await transferRecognizer.collectExample('down');
+  console.log('Now up but say nothing')     
+  await transferRecognizer.collectExample('up');
+  console.log('Now up but say nothing')     
+  await transferRecognizer.collectExample('up');
   console.log('Done')     
        
   console.log('transferRecognizer.countExamples()');      
