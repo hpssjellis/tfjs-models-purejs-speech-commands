@@ -207,7 +207,37 @@ function onDetection(detectionResult) {
 }"> 
   
    
+<input type=button value="load but dont train" onclick="{
 
+(async function(){       
+  newRecognizer = speechCommands.create('BROWSER_FFT', newRecognizerOptions.vocabulary);
+  await newRecognizer.ensureModelLoaded();
+  newRecognizer.params().sampleRateHz = 48000
+  
+  console.log('newRecognizer.wordLabels()')  
+  console.log(newRecognizer.wordLabels())   
+  
+  
+  
+  transferRecognizer = newRecognizer.createTransfer(newRecognizerOptions.vocabulary);
+  
+       
+  console.log('transferRecognizer.countExamples()');      
+  console.log(transferRecognizer.countExamples());   
+    
+    
+
+  console.log('transferRecognizer.countExamples()');      
+  console.log(transferRecognizer.countExamples());   
+       
+  console.log('transferRecognizer.wordLabels()')  
+  console.log(transferRecognizer.wordLabels())      
+    
+                                                                                
+                                             
+ })()  // end inline async
+                                               
+}"> 
 
 
 
@@ -247,7 +277,7 @@ serialized = transferRecognizer.serializeExamples();
 <input type=button value="loadExamples clear false" onclick="{
 
   const clearExisting = false;
-  newTransferRecognizer.loadExamples(serialized, clearExisting);
+  newRecognizer.loadExamples(serialized, clearExisting);
   startListening(newRecognizerOptions, onDetection);  
 }"> 
 
