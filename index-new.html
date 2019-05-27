@@ -155,16 +155,12 @@ function setupListeners() {
        
        
   const transferRecognizer = NewRecognizer.createTransfer('directional4w');
+  console.log('Get Ready')         
   console.log('say left')     
   await transferRecognizer.collectExample('left');
   console.log('say left')     
   await transferRecognizer.collectExample('left');
-  console.log('say left')     
-  await transferRecognizer.collectExample('left');
-  console.log('say left')     
-  await transferRecognizer.collectExample('left');
-  console.log('say left')     
-  await transferRecognizer.collectExample('left');
+ 
   console.log('Done')     
        
   console.log('transferRecognizer.countExamples()');      
