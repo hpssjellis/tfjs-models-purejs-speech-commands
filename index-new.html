@@ -23,7 +23,7 @@
 let recognizer;
      
 let transferRecognizer   
-let words
+
     
 let recognizerOptions = {
     vocabulary: 'directional4w',        // only: up down left right
@@ -86,7 +86,7 @@ async function startListening2(options, onResult) {
     
   console.log('words')  
   console.log(words)  
- // transferRecognizer.params().sampleRateHz = 48000
+  transferRecognizer.params().sampleRateHz = 48000
     
     
     
@@ -241,12 +241,50 @@ function onDetection(detectionResult) {
        
        
        
-       
+  
+                                            
+  const {vocabulary, probabilityThreshold} = options;  
+ // transferRecognizer = speechCommands.create('BROWSER_FFT', vocabulary);
+ // await recognizer.ensureModelLoaded();
+  const words = transferRecognizer.wordLabels(); 
+    
+    
+  console.log('words')  
+  console.log(words)  
+  transferRecognizer.params().sampleRateHz = 48000
+    
+    
+    
+  //console.log('speechCommands')
+ // console.log(speechCommands)
+  console.log('transferRecognizer')
+  console.log(transferRecognizer)
+    
+
+  
+  transferRecognizer.listen(result => {    
+    const maxScore = Math.max(...result.scores);    
+    const maxScoreIndex = result.scores.indexOf(maxScore);    
+    const detectedWord = words[maxScoreIndex];    
+    
+    // Don't trigger on background noise or unknown.
+    if (maxScore > probabilityThreshold && maxScoreIndex < 4) {
+      onResult({
+        detectedWord,
+        detectedWordScore: maxScore,
+        scores: Array.from(result.scores),
+      });
+    }
+  });                                           
+                                            
+                                            
+                                            
+                                            
+                                            
        
  })()   
        
-   console.log('Started listening')    
-   startListening2(recognizerOptions, onDetection);     
+ 
 
 }"> 
   
