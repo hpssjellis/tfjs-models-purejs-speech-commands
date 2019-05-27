@@ -227,11 +227,11 @@ function onDetection(detectionResult) {
   console.log(transferRecognizer.wordLabels())   
        
   //words = transferRecognizer.wordLabels();       
-  transferRecognizer.optimizer  = tf.train.sgd(0.5); 
+  transferRecognizer.optimizer  = tf.train.sgd(0.000002); 
        
        
   await transferRecognizer.train({
-  epochs: 25,
+  epochs: 2,
   callback: {
     onEpochEnd: async (epoch, logs) => {
       console.log(`Epoch ${epoch}: loss=${logs.loss}, accuracy=${logs.acc}`);
