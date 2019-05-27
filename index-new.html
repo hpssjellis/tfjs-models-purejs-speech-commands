@@ -176,8 +176,12 @@ function setupListeners() {
   console.log(transferRecognizer.countExamples());   
        
   console.log('transferRecognizer.wordLabels()')  
-  console.log(transferRecognizer.wordLabels())        
- 
+  console.log(transferRecognizer.wordLabels())   
+       
+       
+    const myOptimizer = tf.train.sgd(0.00005); 
+  // console.log(myOptimizer)                                                                                                  
+   transferRecognizer.compile({optimizer: myOptimizer, loss: 'meanSquaredError'}); 
        
   await transferRecognizer.train({
   epochs: 2,
