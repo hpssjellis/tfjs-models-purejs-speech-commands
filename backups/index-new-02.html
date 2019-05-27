@@ -1,0 +1,341 @@
+
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands@0.3.6"> </script> 
+    <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+    -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.1.2"> </script> 
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands@0.3.8"> </script> 
+
+
+<script>
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////// Start original script.js /////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+/* globals speechCommands */
+let recognizer;
+let recognizerOptions;    // needed this global
+
+async function startListening(options, onResult) {
+  const {vocabulary, probabilityThreshold} = options;  
+  recognizer = speechCommands.create('BROWSER_FFT', vocabulary);
+  await recognizer.ensureModelLoaded();
+  const words = recognizer.wordLabels(); 
+    
+    
+  console.log('words')  
+  console.log(words)  
+  recognizer.params().sampleRateHz = 48000
+    
+    
+    
+  console.log('speechCommands')
+  console.log(speechCommands)
+  console.log('recognizer')
+  console.log(recognizer)
+    
+    
+    console.log(speechCommands.listSavedTransferModels)
+    
+    console.log(recognizer.wordLabels())
+      console.log('recognizer.params().sampleRateHz');
+    
+  console.log('recognizer.params().sampleRateHz');
+  console.log(recognizer.params().sampleRateHz);
+  //console.log(recognizer.params().fftSize);
+  
+  recognizer.listen(result => {    
+    const maxScore = Math.max(...result.scores);    
+    const maxScoreIndex = result.scores.indexOf(maxScore);    
+    const detectedWord = words[maxScoreIndex];    
+    
+    // Don't trigger on background noise or unknown.
+    if (maxScore > probabilityThreshold && maxScoreIndex < 4) {
+      onResult({
+        detectedWord,
+        detectedWordScore: maxScore,
+        scores: Array.from(result.scores),
+      });
+    }
+  });
+  
+}
+
+async function stopListening() {
+  if (recognizer!= null) {
+    recognizer.stopListening()
+  }
+}
+
+function onDetection(detectionResult) {
+//  console.log('ondetection', detectionResult);
+  const { detectedWord } = detectionResult;
+  console.log(detectionResult)
+ // console.log(detectedWord)
+  document.getElementById('myDiv01').innerHTML = detectedWord
+   
+    
+    // Note: speaking seems to mess up the sensing unless you have headphones
+ // setTimeout(function(){    
+  //  if (detectedWord == 'left'){ responsiveVoice.speak('Why do you want to go west?', 'US English Female', {pitch: 1, rate: 1, volume : 1}) }  
+ //   if (detectedWord == 'right'){ responsiveVoice.speak('Going to the east', 'US English Female', {pitch: 1, rate: 1, volume : 1}) }    
+  //  if (detectedWord == 'up'){ responsiveVoice.speak('North, you really want to go North?', 'US English Female', {pitch: 1, rate: 1, volume : 1}) }   
+  //  if (detectedWord == 'down'){ responsiveVoice.speak('Going South now', 'US English Female', {pitch: 1, rate: 1, volume : 1}) }    
+ // }, 30);
+  
+    
+    
+}
+
+function setupListeners() {
+  //const recognizerOptions = {
+  recognizerOptions = {
+    vocabulary: 'directional4w',        // only: up down left right
+   // vocabulary: '18w',                // all 18 words
+    probabilityThreshold: 0.85,
+  };
+  
+}
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////// End original script.js /////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
+</script>
+
+
+
+<h2 align=center>tensorflow-models/speech-commands easiest example </h2>
+
+<div id="myDiv01">...</div><br><br>
+
+
+
+<input type=button value=Setup Model" onclick="{
+   setupListeners()
+       console.log('Speech Commands Setup')
+      // console.log(recognizerOptions);
+      // console.log(recognizerOptions.params().sampleRateHz);
+      // console.log(recognizerOptions.params().fftSize);
+       // want 48000
+}">
+    
+
+<input type=button value="Start" onclick="{
+   console.log('Started listening')    
+   startListening(recognizerOptions, onDetection);
+}">
+        
+<input type=button value="Stop" onclick="{
+   stopListening()
+   console.log('Stop Listening')
+
+}"> 
+  
+         
+<input type=button value="train left" onclick="{
+
+(async function(){       
+  const NewRecognizer = speechCommands.create('BROWSER_FFT', 'directional4w');
+  await NewRecognizer.ensureModelLoaded();
+  NewRecognizer.params().sampleRateHz = 48000
+  
+  console.log('NewRecognizer.wordLabels()')  
+  console.log(NewRecognizer.wordLabels())   
+  
+       
+       
+       
+  const transferRecognizer = NewRecognizer.createTransfer('directional4w');
+  console.log('Get Ready')         
+  console.log('say left')     
+  await transferRecognizer.collectExample('left');
+  console.log('say left')     
+  await transferRecognizer.collectExample('left');
+ 
+  
+  console.log('set _background_noise_')     
+  await transferRecognizer.collectExample('_background_noise_');     
+  console.log('set _background_noise_')     
+  await transferRecognizer.collectExample('_background_noise_');     
+       
+       
+       
+       
+  console.log('Done')     
+       
+  console.log('transferRecognizer.countExamples()');      
+  console.log(transferRecognizer.countExamples());   
+       
+  console.log('transferRecognizer.wordLabels()')  
+  console.log(transferRecognizer.wordLabels())   
+       
+       
+    const myOptimizer = tf.train.sgd(0.00005); 
+  // console.log(myOptimizer)                                                                                                  
+  // transferRecognizer.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});                                     
+  // transferRecognizer.compile({optimizer: myOptimizer}); 
+       
+ transferRecognizer.optimizer  = tf.train.sgd(0.00005); 
+       
+       
+  await transferRecognizer.train({
+  epochs: 2,
+  callback: {
+    onEpochEnd: async (epoch, logs) => {
+      console.log(`Epoch ${epoch}: loss=${logs.loss}, accuracy=${logs.acc}`);
+    }
+  }
+});     
+       
+       
+       
+       
+       
+ })()   
+       
+       
+
+}"> 
+  
+   
+  
+  
+  
+  
+  
+  
+  
+<!-- <input  type="button" value="initilize speak" onclick="{  
+    responsiveVoice.speak('Test for speaking', 'US English Female', 
+{pitch: 1, rate: 1, volume : 1})                                              
+}"> 
+  -->
+  
+  
+  
+ 
+   
+ <input  type="button" value="testing" onclick="{  
+
+ (async function(){     
+  const baseRecognizer = speechCommands.create('BROWSER_FFT');
+await baseRecognizer.ensureModelLoaded();
+       
+baseRecognizer.params().sampleRateHz = 48000
+
+// Each instance of speech-command recognizer supports multiple
+// transfer-learning models, each of which can be trained for a different
+// new vocabulary.
+// Therefore we give a name to the transfer-learning model we are about to
+// train ('colors' in this case).
+       
+       
+       
+const transferRecognizer = baseRecognizer.createTransfer('colors');
+        
+       
+       
+
+// Call `collectExample()` to collect a number of audio examples
+// via WebAudio.
+await transferRecognizer.collectExample('red');
+await transferRecognizer.collectExample('green');
+await transferRecognizer.collectExample('blue');
+await transferRecognizer.collectExample('red');
+// Don't forget to collect some background-noise examples, so that the
+// trasnfer-learned model will be able to detect moments of silence.
+await transferRecognizer.collectExample('_background_noise_');
+await transferRecognizer.collectExample('green');
+await transferRecognizer.collectExample('blue');
+await transferRecognizer.collectExample('_background_noise_');
+// ... You would typically want to put `collectExample`
+//     in the callback of a UI button to allow the user to collect
+//     any desired number of examples in random order.
+
+// You can check the counts of examples for different words that have been
+// collect for this transfer-learning model.
+console.log(transferRecognizer.countExamples());
+// e.g., {'red': 2, 'green': 2', 'blue': 2, '_background_noise': 2};
+
+// Start training of the transfer-learning model.
+// You can specify `epochs` (number of training epochs) and `callback`
+// (the Model.fit callback to use during training), among other configuration
+// fields.
+await transferRecognizer.train({
+  epochs: 25,
+  callback: {
+    onEpochEnd: async (epoch, logs) => {
+      console.log(`Epoch ${epoch}: loss=${logs.loss}, accuracy=${logs.acc}`);
+    }
+  }
+});
+
+// After the transfer learning completes, you can start online streaming
+// recognition using the new model.
+await transferRecognizer.listen(result => {
+  // - result.scores contains the scores for the new vocabulary, which
+  //   can be checked with:
+  const words = transferRecognizer.wordLabels();
+  // `result.scores` contains the scores for the new words, not the original
+  // words.
+  for (let i = 0; i < words; ++i) {
+    console.log(`score for word '${words[i]}' = ${result.scores[i]}`);
+  }
+}, {probabilityThreshold: 0.75});
+
+// Stop the recognition in 10 seconds.
+setTimeout(() => transferRecognizer.stopListening(), 10e3);     
+ 
+      const serialized = transferRecognizer.serializeExamples();
+      
+      
+      const newTransferRecognizer = baseRecognizer.createTransfer('fred');
+      
+      
+      const clearExisting = false;
+      
+      
+      newTransferRecognizer.loadExamples(serialized, clearExisting);      
+      console.log(newTransferRecognizer)
+      })()
+      
+      
+      
+
+       
+}"> 
+  
+  
+  
+   
+  
+  
+  
+  
+  
+  
+  <br> <br> <br>      
+        
+        
+Original example by @tafsiri at <a href="https://glitch.com/~tfjs-speech-commands">https://glitch.com/~tfjs-speech-commands</a><br><br><br>
+                                                                                  
+This website is able to understand 4 speech commands, it works best if you use headphones or an external speaker:<br>
+
+"up", "down", "left", "right", <br><br>
+Still testing the full 18 commands:<br>
+                             
+0, 1, 2, 3, 4, 5, 6,7 8, 9,<br>  
+"go", "stop", "yes", "no", <br>
+"unknown word" , "background noise".
+<br><br>
+                                   
+            
