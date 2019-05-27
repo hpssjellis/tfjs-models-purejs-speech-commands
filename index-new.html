@@ -118,14 +118,14 @@ async function startListening2(options, onResult) {
     
     
 async function stopListening() {
-  if (recognizer!= null) {
+  if (recognizer != null) {
     recognizer.stopListening()
   }
 }
     
     
 async function stopListening2() {
-  if (transferRecognizer!= null) {
+  if (transferRecognizer != null) {
     transferRecognizer.stopListening()
   }
 }
@@ -263,12 +263,7 @@ function onDetection(detectionResult) {
 
 }"> 
   
-   
-<input type=button value="Stop 2" onclick="{
-   stopListening2()
-   console.log('Stop Listening')
-
-}">   
+ 
   
   
   
