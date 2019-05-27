@@ -243,7 +243,7 @@ function onDetection(detectionResult) {
        
   
                                             
-  const {vocabulary, probabilityThreshold} = options;  
+  const {vocabulary, probabilityThreshold} = recognizerOptions;  
  // transferRecognizer = speechCommands.create('BROWSER_FFT', vocabulary);
  // await recognizer.ensureModelLoaded();
   const words = transferRecognizer.wordLabels(); 
@@ -269,7 +269,7 @@ function onDetection(detectionResult) {
     
     // Don't trigger on background noise or unknown.
     if (maxScore > probabilityThreshold && maxScoreIndex < 4) {
-      onResult({
+      onDetection({
         detectedWord,
         detectedWordScore: maxScore,
         scores: Array.from(result.scores),
