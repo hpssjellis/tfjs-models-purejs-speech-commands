@@ -260,7 +260,7 @@ function onDetection(detectionResult) {
   console.log('transferRecognizer')
   console.log(transferRecognizer)
     
-
+console.log('start Listening')
   
   transferRecognizer.listen(result => {    
     const maxScore = Math.max(...result.scores);    
@@ -278,6 +278,8 @@ function onDetection(detectionResult) {
   });                                           
                                             
                                             
+  
+console.log('stop Listening')
                                             
                                             
                                             
