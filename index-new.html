@@ -21,6 +21,9 @@
 
 /* globals speechCommands */
 let recognizer;
+     
+let transferRecognizer   
+    
 let recognizerOptions = {
     vocabulary: 'directional4w',        // only: up down left right
    // vocabulary: '18w',                // all 18 words
@@ -72,6 +75,47 @@ async function startListening(options, onResult) {
   
 }
 
+    
+async function startListening2(options, onResult) {
+  const {vocabulary, probabilityThreshold} = options;  
+ // transferRecognizer = speechCommands.create('BROWSER_FFT', vocabulary);
+ // await recognizer.ensureModelLoaded();
+  const words = transferRecognizer.wordLabels(); 
+    
+    
+  console.log('words')  
+  console.log(words)  
+  transferRecognizer.params().sampleRateHz = 48000
+    
+    
+    
+  //console.log('speechCommands')
+ // console.log(speechCommands)
+  console.log('transferRecognizer')
+  console.log(transferRecognizer)
+    
+
+  
+  transferRecognizer.listen(result => {    
+    const maxScore = Math.max(...result.scores);    
+    const maxScoreIndex = result.scores.indexOf(maxScore);    
+    const detectedWord = words[maxScoreIndex];    
+    
+    // Don't trigger on background noise or unknown.
+    if (maxScore > probabilityThreshold && maxScoreIndex < 4) {
+      onResult({
+        detectedWord,
+        detectedWordScore: maxScore,
+        scores: Array.from(result.scores),
+      });
+    }
+  });
+  
+}
+    
+    
+    
+    
 async function stopListening() {
   if (recognizer!= null) {
     recognizer.stopListening()
@@ -117,19 +161,19 @@ function onDetection(detectionResult) {
 
     
 
-<input type=button value="Start" onclick="{
+<input type=button value="Start 1" onclick="{
    console.log('Started listening')    
    startListening(recognizerOptions, onDetection);
 }">
         
-<input type=button value="Stop" onclick="{
+<input type=button value="Stop 1" onclick="{
    stopListening()
    console.log('Stop Listening')
 
 }"> 
   
          
-<input type=button value="train left" onclick="{
+<input type=button value="train 2" onclick="{
 
 (async function(){       
   const NewRecognizer = speechCommands.create('BROWSER_FFT', 'directional4w');
@@ -142,7 +186,7 @@ function onDetection(detectionResult) {
        
        
        
-  const transferRecognizer = NewRecognizer.createTransfer('directional4w');
+  transferRecognizer = NewRecognizer.createTransfer('directional4w');
   console.log('Get Ready')         
   console.log('say left')     
   await transferRecognizer.collectExample('left');
@@ -200,7 +244,8 @@ function onDetection(detectionResult) {
        
  })()   
        
-       
+   console.log('Started listening')    
+   startListening2(recognizerOptions, onDetection);     
 
 }"> 
   
