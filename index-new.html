@@ -181,7 +181,8 @@ function setupListeners() {
        
     const myOptimizer = tf.train.sgd(0.00005); 
   // console.log(myOptimizer)                                                                                                  
-   transferRecognizer.model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'}); 
+  // transferRecognizer.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});                                     
+   transferRecognizer.compile({optimizer: myOptimizer}); 
        
   await transferRecognizer.train({
   epochs: 2,
