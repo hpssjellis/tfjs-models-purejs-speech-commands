@@ -122,6 +122,16 @@ async function stopListening() {
     recognizer.stopListening()
   }
 }
+    
+    
+async function stopListening2() {
+  if (transferRecognizer!= null) {
+    transferRecognizer.stopListening()
+  }
+}
+       
+    
+    
 
 function onDetection(detectionResult) {
 //  console.log('ondetection', detectionResult);
@@ -254,7 +264,11 @@ function onDetection(detectionResult) {
 }"> 
   
    
-  
+<input type=button value="Stop 2" onclick="{
+   stopListening2()
+   console.log('Stop Listening')
+
+}">   
   
   
   
