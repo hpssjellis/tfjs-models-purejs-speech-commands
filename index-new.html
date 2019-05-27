@@ -21,7 +21,11 @@
 
 /* globals speechCommands */
 let recognizer;
-let recognizerOptions;    // needed this global
+let recognizerOptions = {
+    vocabulary: 'directional4w',        // only: up down left right
+   // vocabulary: '18w',                // all 18 words
+    probabilityThreshold: 0.85,
+  };
 
 async function startListening(options, onResult) {
   const {vocabulary, probabilityThreshold} = options;  
@@ -94,15 +98,7 @@ function onDetection(detectionResult) {
     
 }
 
-function setupListeners() {
-  //const recognizerOptions = {
-  recognizerOptions = {
-    vocabulary: 'directional4w',        // only: up down left right
-   // vocabulary: '18w',                // all 18 words
-    probabilityThreshold: 0.85,
-  };
-  
-}
+
 
 
 
@@ -119,14 +115,6 @@ function setupListeners() {
 
 
 
-<input type=button value=Setup Model" onclick="{
-   setupListeners()
-       console.log('Speech Commands Setup')
-      // console.log(recognizerOptions);
-      // console.log(recognizerOptions.params().sampleRateHz);
-      // console.log(recognizerOptions.params().fftSize);
-       // want 48000
-}">
     
 
 <input type=button value="Start" onclick="{
@@ -161,6 +149,21 @@ function setupListeners() {
   console.log('say left')     
   await transferRecognizer.collectExample('left');
  
+       
+  console.log('say right')     
+  await transferRecognizer.collectExample('right');
+  console.log('say right')     
+  await transferRecognizer.collectExample('right');
+       
+  console.log('say up')     
+  await transferRecognizer.collectExample('up');
+  console.log('say up')     
+  await transferRecognizer.collectExample('up');
+       
+  console.log('say down')     
+  await transferRecognizer.collectExample('down');
+  console.log('say down')     
+  await transferRecognizer.collectExample('down');
   
   console.log('set _background_noise_')     
   await transferRecognizer.collectExample('_background_noise_');     
@@ -178,11 +181,6 @@ function setupListeners() {
   console.log('transferRecognizer.wordLabels()')  
   console.log(transferRecognizer.wordLabels())   
        
-       
-    const myOptimizer = tf.train.sgd(0.00005); 
-  // console.log(myOptimizer)                                                                                                  
-  // transferRecognizer.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});                                     
-  // transferRecognizer.compile({optimizer: myOptimizer}); 
        
  transferRecognizer.optimizer  = tf.train.sgd(0.00005); 
        
