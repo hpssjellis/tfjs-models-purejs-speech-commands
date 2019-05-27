@@ -23,6 +23,7 @@
 let recognizer;
      
 let transferRecognizer   
+let words
     
 let recognizerOptions = {
     vocabulary: 'directional4w',        // only: up down left right
@@ -80,7 +81,7 @@ async function startListening2(options, onResult) {
   const {vocabulary, probabilityThreshold} = options;  
  // transferRecognizer = speechCommands.create('BROWSER_FFT', vocabulary);
  // await recognizer.ensureModelLoaded();
-  const words = transferRecognizer.wordLabels(); 
+  //const words = transferRecognizer.wordLabels(); 
     
     
   console.log('words')  
@@ -225,8 +226,8 @@ function onDetection(detectionResult) {
   console.log('transferRecognizer.wordLabels()')  
   console.log(transferRecognizer.wordLabels())   
        
-       
- transferRecognizer.optimizer  = tf.train.sgd(0.00005); 
+  words = transferRecognizer.wordLabels();       
+  transferRecognizer.optimizer  = tf.train.sgd(0.00005); 
        
        
   await transferRecognizer.train({
