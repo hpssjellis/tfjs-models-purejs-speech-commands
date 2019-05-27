@@ -161,6 +161,15 @@ function setupListeners() {
   console.log('say left')     
   await transferRecognizer.collectExample('left');
  
+  
+  console.log('set _background_noise_')     
+  await transferRecognizer.collectExample('_background_noise_');     
+  console.log('set _background_noise_')     
+  await transferRecognizer.collectExample('_background_noise_');     
+       
+       
+       
+       
   console.log('Done')     
        
   console.log('transferRecognizer.countExamples()');      
