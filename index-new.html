@@ -2,11 +2,12 @@
     <!--
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands@0.3.6"> </script> 
+    <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
     -->
 
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.1.2"> </script> 
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands@0.3.6"> </script> 
-    <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands@0.3.8"> </script> 
 
 
 <script>
@@ -83,10 +84,10 @@ function onDetection(detectionResult) {
     
     // Note: speaking seems to mess up the sensing unless you have headphones
  // setTimeout(function(){    
-    if (detectedWord == 'left'){ responsiveVoice.speak('Why do you want to go west?', 'US English Female', {pitch: 1, rate: 1, volume : 1}) }  
-    if (detectedWord == 'right'){ responsiveVoice.speak('Going to the east', 'US English Female', {pitch: 1, rate: 1, volume : 1}) }    
-    if (detectedWord == 'up'){ responsiveVoice.speak('North, you really want to go North?', 'US English Female', {pitch: 1, rate: 1, volume : 1}) }   
-    if (detectedWord == 'down'){ responsiveVoice.speak('Going South now', 'US English Female', {pitch: 1, rate: 1, volume : 1}) }    
+  //  if (detectedWord == 'left'){ responsiveVoice.speak('Why do you want to go west?', 'US English Female', {pitch: 1, rate: 1, volume : 1}) }  
+ //   if (detectedWord == 'right'){ responsiveVoice.speak('Going to the east', 'US English Female', {pitch: 1, rate: 1, volume : 1}) }    
+  //  if (detectedWord == 'up'){ responsiveVoice.speak('North, you really want to go North?', 'US English Female', {pitch: 1, rate: 1, volume : 1}) }   
+  //  if (detectedWord == 'down'){ responsiveVoice.speak('Going South now', 'US English Female', {pitch: 1, rate: 1, volume : 1}) }    
  // }, 30);
   
     
@@ -187,11 +188,11 @@ function setupListeners() {
   
   
   
- <input  type="button" value="initilize speak" onclick="{  
+<!-- <input  type="button" value="initilize speak" onclick="{  
     responsiveVoice.speak('Test for speaking', 'US English Female', 
 {pitch: 1, rate: 1, volume : 1})                                              
 }"> 
-  
+  -->
   
   
   
